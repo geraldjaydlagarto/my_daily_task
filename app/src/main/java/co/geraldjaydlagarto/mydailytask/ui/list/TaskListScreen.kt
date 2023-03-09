@@ -65,7 +65,7 @@ private fun DailyTaskItem() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Gray)
+            .background(Color.Yellow)
             .heightIn(54.dp)
             .absolutePadding(
                 left = 8.dp,
