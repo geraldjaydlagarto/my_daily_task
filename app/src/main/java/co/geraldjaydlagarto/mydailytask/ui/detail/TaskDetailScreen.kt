@@ -1,14 +1,24 @@
 package co.geraldjaydlagarto.mydailytask.ui.detail
 
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextDirection.Companion.Content
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import co.geraldjaydlagarto.mydailytask.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,6 +59,68 @@ private fun TopBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
+@Preview
 private fun Content(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .background(color = Color.Yellow, shape = RoundedCornerShape(16.dp)),
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        ContentTimeSection(
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 16.dp,
+                end = 16.dp
+            )
+        )
+        ContentCountdownSection(modifier = Modifier.padding(horizontal = 16.dp))
+        ContentControlsSection(
+            modifier = Modifier.padding(
+                start = 16.dp,
+                bottom = 16.dp,
+                end = 16.dp
+            )
+        )
+    }
+}
+
+@Composable
+private fun ContentTimeSection(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Column {
+            Text(text = "Minutes Elapsed")
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_hourglass_bottom_24),
+                    contentDescription = null
+                )
+                Text(text = "19")
+            }
+        }
+        Column(horizontalAlignment = Alignment.End) {
+            Text(text = "Minutes Remaining")
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = "101")
+                Icon(
+                    painter = painterResource(id = R.drawable.baseline_hourglass_top_24),
+                    contentDescription = null
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ContentCountdownSection(modifier: Modifier = Modifier) {
+
+}
+
+@Composable
+private fun ContentControlsSection(modifier: Modifier = Modifier) {
 
 }

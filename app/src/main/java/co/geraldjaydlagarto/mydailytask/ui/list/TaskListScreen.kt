@@ -65,9 +65,14 @@ private fun DailyTaskItem() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Yellow)
-            .absolutePadding(10.dp)
+            .background(Color.Gray)
             .heightIn(54.dp)
+            .absolutePadding(
+                left = 8.dp,
+                top = 8.dp,
+                right = 8.dp,
+                bottom = 8.dp
+            )
             .clickable {
 
             },
