@@ -145,6 +145,38 @@ private fun ContentCountdownSection(modifier: Modifier = Modifier) {
 }
 
 @Composable
+@Preview
 private fun ContentControlsSection(modifier: Modifier = Modifier) {
-
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        IconButton(
+            onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(id = R.drawable.baseline_stop_circle_24),
+                contentDescription = "Stop"
+            )
+        }
+        Spacer(modifier = Modifier.width(24.dp))
+        IconButton(
+            modifier = Modifier.size(72.dp),
+            onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(id = R.drawable.baseline_play_circle_24),
+                contentDescription = "Play"
+            )
+        }
+        Spacer(modifier = Modifier.width(24.dp))
+        IconButton(onClick = { /*TODO*/ }) {
+            Icon(
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(id = R.drawable.baseline_pause_circle_24),
+                contentDescription = "Pause"
+            )
+        }
+    }
 }
