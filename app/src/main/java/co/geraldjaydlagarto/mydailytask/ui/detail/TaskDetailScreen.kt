@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextDirection.Companion.Content
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.geraldjaydlagarto.mydailytask.R
+import kotlin.text.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -116,8 +117,31 @@ private fun ContentTimeSection(modifier: Modifier = Modifier) {
 }
 
 @Composable
+@Preview
 private fun ContentCountdownSection(modifier: Modifier = Modifier) {
-
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Design the app", style = MaterialTheme.typography.headlineLarge)
+        Row(
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "101", style = MaterialTheme.typography.displayLarge)
+                Text(text = "Minutes")
+            }
+            Text(text = ":", style = MaterialTheme.typography.displayLarge)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "45", style = MaterialTheme.typography.displayLarge)
+                Text(text = "Seconds")
+            }
+        }
+    }
 }
 
 @Composable
