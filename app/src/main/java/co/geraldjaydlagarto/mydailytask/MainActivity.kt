@@ -12,6 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import co.geraldjaydlagarto.mydailytask.ui.edit.AddTaskScreen
 import co.geraldjaydlagarto.mydailytask.ui.detail.TaskDetailScreen
 import co.geraldjaydlagarto.mydailytask.ui.edit.EditTaskScreen
 import co.geraldjaydlagarto.mydailytask.ui.list.TaskListScreen
@@ -44,7 +45,7 @@ fun Content() {
                     navController.navigate("task_detail")
                 },
                 onAddTask = {
-                    navController.navigate("edit_task")
+                    navController.navigate("add_task")
                 })
         }
         composable("task_detail") {
@@ -54,6 +55,17 @@ fun Content() {
                 },
                 onEditTask = {
                     navController.navigate("edit_task")
+                }
+            )
+        }
+
+        composable("add_task") {
+            AddTaskScreen(
+                onBack = {
+                    navController.navigateUp()
+                },
+                onSaveTask = {
+
                 }
             )
         }
