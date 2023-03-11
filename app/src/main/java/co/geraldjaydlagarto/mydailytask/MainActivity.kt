@@ -6,10 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import co.geraldjaydlagarto.mydailytask.ui.detail.TaskDetailScreen
+import co.geraldjaydlagarto.mydailytask.ui.edit.EditTaskScreen
+import co.geraldjaydlagarto.mydailytask.ui.list.TaskListScreen
 import co.geraldjaydlagarto.mydailytask.ui.theme.MyDailyTaskTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    Content()
                 }
             }
         }
@@ -30,14 +35,48 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Content() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "task_list") {
+        composable("task_list") {
+            TaskListScreen(
+                onSelectTask = {
+                    navController.navigate("task_detail")
+                },
+                onAddTask = {
+                    navController.navigate("edit_task")
+                })
+        }
+        composable("task_detail") {
+            TaskDetailScreen(
+                onBack = {
+                    navController.navigateUp()
+                },
+                onEditTask = {
+                    navController.navigate("edit_task")
+                }
+            )
+        }
+        composable("edit_task") {
+            EditTaskScreen(
+                onBack = {
+                    navController.navigateUp()
+                },
+                onDeleteTask = {
+
+                },
+                onSaveTask = {
+
+                }
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MyDailyTaskTheme {
-        Greeting("Android")
+        Content()
     }
 }

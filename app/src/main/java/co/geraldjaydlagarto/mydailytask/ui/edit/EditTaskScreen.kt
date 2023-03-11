@@ -21,27 +21,37 @@ import co.geraldjaydlagarto.mydailytask.ui.extensions.absolutePadding
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
-fun EditTaskScreen() {
+fun EditTaskScreen(
+    onBack: () -> Unit = {},
+    onDeleteTask: () -> Unit = {},
+    onSaveTask: () -> Unit = {},
+) {
     Scaffold(
         topBar = {
-            TopBar()
+            TopBar(onBack = onBack, onDeleteTask = onDeleteTask)
         }
     ) {
         Content(
-            modifier = Modifier.padding(it)
+            modifier = Modifier.padding(it),
+            onCancel = onBack,
+            onSaveTask = onSaveTask
         )
     }
 }
 
 @Composable
 @Preview
-private fun TopBar(modifier: Modifier = Modifier) {
+private fun TopBar(
+    modifier: Modifier = Modifier,
+    onBack: () -> Unit = {},
+    onDeleteTask: () -> Unit = {}
+) {
     SmallTopAppBar(
         title = {
 
         },
         actions = {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { onDeleteTask() }) {
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Add task",
@@ -53,13 +63,18 @@ private fun TopBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun Content(modifier: Modifier = Modifier) {
+private fun Content(
+    modifier: Modifier = Modifier,
+    onCancel: () -> Unit = {},
+    onSaveTask: () -> Unit = {}
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        // put states here
         ContentTitleInputSection()
         ContentLengthInputSection()
         ContentThemeInputSection()
@@ -68,12 +83,12 @@ private fun Content(modifier: Modifier = Modifier) {
         ) {
             TextButton(
                 modifier = Modifier.weight(1f),
-                onClick = { /*TODO*/ }) {
+                onClick = { onCancel() }) {
                 Text(text = "Cancel")
             }
             Button(
                 modifier = Modifier.weight(1f),
-                onClick = { /*TODO*/ }) {
+                onClick = { onSaveTask() }) {
                 Text(text = "Save")
             }
         }

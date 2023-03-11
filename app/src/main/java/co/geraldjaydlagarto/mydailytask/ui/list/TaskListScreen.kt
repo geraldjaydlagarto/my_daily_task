@@ -19,27 +19,28 @@ import co.geraldjaydlagarto.mydailytask.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
-fun TaskListScreen() {
+fun TaskListScreen(onSelectTask: () -> Unit = {}, onAddTask: () -> Unit = {}) {
     Scaffold(
         topBar = {
-            TopBar()
+            TopBar(onAddTask = onAddTask)
         }
     ) {
         Content(
-            modifier = Modifier.padding(it)
+            modifier = Modifier.padding(it),
+            onSelectTask = onSelectTask
         )
     }
 }
 
 @Composable
 @Preview
-private fun TopBar(modifier: Modifier = Modifier) {
+private fun TopBar(modifier: Modifier = Modifier, onAddTask: () -> Unit = {}) {
     SmallTopAppBar(
         title = {
             Text(text = "Daily Tasks")
         },
         actions = {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { onAddTask() }) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add task")
             }
         }
@@ -47,21 +48,21 @@ private fun TopBar(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun Content(modifier: Modifier = Modifier) {
+private fun Content(modifier: Modifier = Modifier, onSelectTask: () -> Unit = {}) {
     LazyColumn(
         modifier = modifier
             .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
             .fillMaxSize()
     ) {
         item {
-            DailyTaskItem()
+            DailyTaskItem(onSelectTask)
         }
     }
 }
 
 @Composable
 @Preview
-private fun DailyTaskItem() {
+private fun DailyTaskItem(onSelectTask: () -> Unit = {}) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -74,7 +75,7 @@ private fun DailyTaskItem() {
                 bottom = 8.dp
             )
             .clickable {
-
+                onSelectTask()
             },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp)

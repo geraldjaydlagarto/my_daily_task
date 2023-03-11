@@ -25,10 +25,16 @@ import kotlin.text.Typography
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
-fun TaskDetailScreen() {
+fun TaskDetailScreen(
+    onBack: () -> Unit = {},
+    onEditTask: () -> Unit = {}
+) {
     Scaffold(
         topBar = {
-            TopBar()
+            TopBar(
+                onBack = onBack,
+                onEditTask = onEditTask
+            )
         }
     ) {
         Content(
@@ -40,19 +46,27 @@ fun TaskDetailScreen() {
 
 @Composable
 @Preview
-private fun TopBar(modifier: Modifier = Modifier) {
+private fun TopBar(
+    modifier: Modifier = Modifier,
+    onBack: () -> Unit = {},
+    onEditTask: () -> Unit = {}
+) {
     SmallTopAppBar(
         title = {
             Text(text = "Daily Tasks", style = MaterialTheme.typography.titleLarge)
         },
+
         navigationIcon = {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Go Back"
-            )
+            IconButton(onClick = { onBack() }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Go Back"
+                )
+            }
+
         },
         actions = {
-            TextButton(onClick = { /*TODO*/ }) {
+            TextButton(onClick = { onEditTask() }) {
                 Text(text = "Edit", style = MaterialTheme.typography.labelLarge)
             }
         }
